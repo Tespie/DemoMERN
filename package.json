@@ -1,0 +1,31 @@
+{
+  "name": "demomern",
+  "version": "1.0.0",
+  "description": "PROJECT-Level Dependencies \n This is first ever project created by Tejas patel while setting up MERN env on windows for API development.",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "devOriginal": "concurrently \"npm start\" \"npm run client\"",
+    "dev": "concurrently -c \"bgGreen,bgCyan\" --prefix demomern  \"npm start\" \"npm run client\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Tejas Patel",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "joi": "^17.12.0",
+    "mongoose": "^8.0.1",
+    "mongoose-id-validator": "^0.6.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.0.1"
+  }
+}
