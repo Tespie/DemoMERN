@@ -8,6 +8,13 @@
  */
 // const checkUniqueFieldsInDatabase = (db) => async (fieldsToCheck, data, operation, filter = {}) => {
 export const checkUniqueFieldsInDatabase = (db) => async (fieldsToCheck, data, operation, filter = {}) => {
+
+  console.log('checkUniqueFieldsInDatabase Called')
+  console.log('checkUniqueFieldsInDatabase db = ', db)
+  console.log('checkUniqueFieldsInDatabase fieldsToCheck = ', fieldsToCheck)
+  console.log('checkUniqueFieldsInDatabase data = ', data)
+  console.log('checkUniqueFieldsInDatabase operation = ', operation)
+
   switch (operation) {
     case 'INSERT':
       for (const field of fieldsToCheck) {

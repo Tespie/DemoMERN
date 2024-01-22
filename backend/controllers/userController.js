@@ -169,24 +169,43 @@ export const login = async (req, res) => {
 export const createUser = asyncHandler(async (req, res) => {
 
     let dataToCreate = { ...req.body || {} };
-
+    let newUser = createUserObject(dataToCreate);
     console.log('In userController dataToCreate = ', dataToCreate)
+
+    let result;
 
     try {
 
-        let checkUniqueFields = await checkUniqueFieldsInDatabase(userDb)
-
         const validateRequest = schemaValidation(createUserSchema)(dataToCreate);
-        let result;
+        let checkUniqueFields = await checkUniqueFieldsInDatabase(userDb)(['email'], newUser, 'INSERT');
+
+
+        // let checkUniqueFields = await checkUniqueFieldsInDatabase(userDb)([ 'email' ],newUser,'INSERT');
+
+        // let checkUniqueFieldsInDB = checkUniqueFieldsInDatabase(userDb);
+        // let checkUniqueFields = await checkUniqueFieldsInDB(['email'], newUser, 'INSERT');
+
+
+        // let checkUniqueFields = checkUniqueFieldsInDatabase(userDb)(['email'], newUser, 'INSERT');
+        // let checkUniqueFields = checkUniqueFieldsInDatabase(userDb)(['phone'], newUser, 'INSERT');
+        // let checkUniqueFields = await checkUniqueFieldsInDB(['email'], newUser, 'INSERT');
+
+        debugger
+
         if (!validateRequest.isValid) {
             result = responseFuncs.validationError({ message: `Invalid values in params , ${validateRequest.message}` });
-            console.log('In userController validationError IF result = ', result)
+            console.log('In userController Schema_validationError IF result = ', result)
+        } else if (checkUniqueFields.isDuplicate) {
+            result = responseFuncs.validationError({ message: `${checkUniqueFields.value} already exists.Unique ${checkUniqueFields.field} are allowed.` });
+            console.log('In userController checkUniqueFields_validationError ELSE IF checkUniqueFields = ', checkUniqueFields)
+            console.log('In userController checkUniqueFields_validationError ELSE IF result = ', result)
         } else {
             // let newUser = createUserObject(dataToCreate);
             // var user = await create(newUser);
             // result = responseFuncs.success({ data: user });
 
-            let newUser = createUserObject(dataToCreate);
+
+            console.log('In userController validationError ELSE checkUniqueFields = ', checkUniqueFields)
             console.log('In userController validationError ELSE newUser createUserObject = ', newUser)
             newUser = await create(newUser);
             console.log('In userController validationError ELSE newUser = ', newUser)
@@ -194,7 +213,7 @@ export const createUser = asyncHandler(async (req, res) => {
             console.log('In userController validationError ELSE result = ', result)
         }
 
-        console.warn('In userController responseHandler = ', responseHandler(res, result))
+        // console.warn('In userController responseHandler = ', responseHandler(res, result))
 
         return responseHandler(res, result);
 

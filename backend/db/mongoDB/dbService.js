@@ -41,11 +41,17 @@ export const mongoDbService = (Model) => {
     });
   });
 
-  const findOne = (filter) => new Promise((resolve, reject) => {
-    Model.findOne(filter, (error, result) => {
-      if (error) reject(error);
-      else resolve(result);
-    });
+  const findOne = (filter) => new Promise(async (resolve, reject) => {
+    // Model.findOne(filter, (error, result) => {
+    //   if (error) reject(error);
+    //   else resolve(result);
+    // });
+    try {
+      const result = await Model.findOne(filter);
+      resolve(result);
+    } catch (error) {
+      reject(error);
+    }
   });
 
   const findMany = (filter) => new Promise((resolve, reject) => {
