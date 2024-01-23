@@ -44,7 +44,12 @@ function App() {
       </header>
 
       <div style={{ bottom: "-100px", width: "200px" }}>
-        <input placeholder='enter your name here' color='red' onClick={domagic('red')} onFocus={domagic('blue')} />
+        <input
+          onChange={(val) => {
+            debugger;
+            console.log('val = ', val)
+          }
+          } placeholder='enter your name here' color='red' onClick={domagic('red')} onFocus={domagic('blue')} />
       </div>
 
       <div>

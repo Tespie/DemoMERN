@@ -180,18 +180,6 @@ export const createUser = asyncHandler(async (req, res) => {
         let checkUniqueFields = await checkUniqueFieldsInDatabase(userDb)(['email'], newUser, 'INSERT');
 
 
-        // let checkUniqueFields = await checkUniqueFieldsInDatabase(userDb)([ 'email' ],newUser,'INSERT');
-
-        // let checkUniqueFieldsInDB = checkUniqueFieldsInDatabase(userDb);
-        // let checkUniqueFields = await checkUniqueFieldsInDB(['email'], newUser, 'INSERT');
-
-
-        // let checkUniqueFields = checkUniqueFieldsInDatabase(userDb)(['email'], newUser, 'INSERT');
-        // let checkUniqueFields = checkUniqueFieldsInDatabase(userDb)(['phone'], newUser, 'INSERT');
-        // let checkUniqueFields = await checkUniqueFieldsInDB(['email'], newUser, 'INSERT');
-
-        debugger
-
         if (!validateRequest.isValid) {
             result = responseFuncs.validationError({ message: `Invalid values in params , ${validateRequest.message}` });
             console.log('In userController Schema_validationError IF result = ', result)

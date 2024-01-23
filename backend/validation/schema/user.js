@@ -3,9 +3,11 @@ import joi from 'joi';
 export const createUserSchema = joi.object({
     // username: joi.string().allow(null).allow(''),
     // username: joi.string(), 
+    username: joi.string().allow(null).allow(''),
     email: joi.string().allow(null).allow(''),
-    phone: joi.string().allow(null).allow(''),
-    password: joi.string().allow(null).allow('')
+    password: joi.string().allow(null).allow(''),
+
+    // phone: joi.string().allow(null).allow(''),                       
 }).unknown(true);
 
 

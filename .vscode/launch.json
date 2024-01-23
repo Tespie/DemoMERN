@@ -15,13 +15,43 @@
             "type": "node",
         },
         {
+            "name": "TJ Debug Your Backend",
             "type": "node",
             "request": "launch",
-            "name": "TJ Debug",
             "skipFiles": [
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\backend\\server.js",
+        },
+        {
+            "name": "Debug FRONT-END", // Give your task a name
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:3000", // Enter the URL it will be on
+            "webRoot": "${workspaceFolder}/frontend/src"
+        },
+        {
+            "name": "Debug BACK-END - NOT WORKING", // Give your task a name
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "npm start" // Enter the command to run
+        },
+        {
+            "name": "Debug BACK-END - Still Not Working", // Give your task a name
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "npm run start" // Enter the command to run
+        },
+        {
+            "name": "Debug full stack",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "npm run dev",
+            "serverReadyAction": {
+                "pattern": "started server on .+, url: (https?://.+)",
+                "uriFormat": "%s",
+                "action": "debugWithChrome"
+            }
         }
     ]
 }

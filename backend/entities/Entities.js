@@ -1,8 +1,9 @@
 export const createUserObject = (user) => {
     let newUser = {
+        username: user.username,
         email: user.email,
-        phone: user.phone,
         password: user.password,
+        // phone: user.phone,
         // userType: user.userType,
         // isActive: user.isActive,
         // isDeleted: user.isDeleted,

@@ -1,12 +1,12 @@
-// import { responseCode } from "./responseCode";
+import { responseCode } from "./responseCode.js";
 
-const responseCode = {
-    success: 200,
-    badRequest: 400,
-    internalServerError: 500,
-    unAuthorized: 401,
-    validationError: 422,
-};
+// const responseCode = {
+//     success: 200,
+//     badRequest: 400,
+//     internalServerError: 500,
+//     unAuthorized: 401,
+//     validationError: 422,
+// };
 
 // module.exports = (res, body = {}) => {
 export const responseHandler = (res, body = {}) => {
@@ -38,6 +38,6 @@ export const responseHandler = (res, body = {}) => {
         default:
             statusCode = responseCode.internalServerError;
     }
-    // return res.set(headers).status(statusCode).send(body);
-    return res.status(statusCode).send(body);
+    return res.set(headers).status(statusCode).send(body);
+    // return res.status(statusCode).send(body);
 };

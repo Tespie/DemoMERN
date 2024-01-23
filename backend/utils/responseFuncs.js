@@ -1,16 +1,16 @@
-// import { responseStatus } from "./responseStatus";
+import { responseStatus } from "./responseStatus.js";
 
 // import responseStatus from "./responseStatus";
 
-const responseStatus = {
-    success: 'SUCCESS',
-    failure: 'FAILURE',
-    serverError: 'SERVER_ERROR',
-    badRequest: 'BAD_REQUEST',
-    recordNotFound: 'RECORD_NOT_FOUND',
-    validationError: 'VALIDATION_ERROR',
-    unauthorized: 'UNAUTHORIZED',
-};
+// const responseStatus = {
+//     success: 'SUCCESS',
+//     failure: 'FAILURE',
+//     serverError: 'SERVER_ERROR',
+//     badRequest: 'BAD_REQUEST',
+//     recordNotFound: 'RECORD_NOT_FOUND',
+//     validationError: 'VALIDATION_ERROR',
+//     unauthorized: 'UNAUTHORIZED',
+// };
 
 export const success = (data = {}) => ({
     status: responseStatus.success,
