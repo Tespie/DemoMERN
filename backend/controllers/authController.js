@@ -62,23 +62,26 @@ export const login = asyncHandler(async (req, res) => {
     let dataToCreate = { ...req.body || {} };
 
     let {
-        username, password
+        email, password
     } = dataToCreate;
+
+    console.log('authController_login dataToCreate = ', dataToCreate);
 
     let result;
 
     try {
 
-        if (!username || !password) {
-            result = responseFuncs.badRequest({ message: 'Insufficient request parameters! username and password is required.' });
+        if (!email || !password) {
+            result = responseFuncs.badRequest({ message: 'Insufficient request parameters! email and password is required.' });
+            console.log('authController_login noEmail or noPassword');
             return responseHandler(res, result);
         }
 
-        let where = { 'email': username };
+        let where = { 'email': email };
         // where.isDeleted = false; // tj's app don't need this right now :)
 
         let user = await userDb.findOne(where);
-
+        console.log('authController_login found user = ', user);
         if (user) {
 
             //TODO : Check why isPasswordMatch is not called ?
@@ -87,7 +90,9 @@ export const login = asyncHandler(async (req, res) => {
             const isPasswordMatched = user.password === password
 
             if (!isPasswordMatched) {
+                console.log('authController_login Incorrect password  = ', user);
                 result = responseFuncs.badRequest({ message: 'Incorrect password' });
+                // if we change this to return success instead of badRequest then this will work.
             } else {
 
                 const userData = user.toJSON();
@@ -96,16 +101,19 @@ export const login = asyncHandler(async (req, res) => {
                     data: userData,
                     message: 'Login Successful'
                 });
+
+                console.log('authController_login success result userData = ', userData);
             }
 
         } else {
             result = responseFuncs.badRequest({ message: 'User not exists' });
+            console.log('authController_login user not found = ', user);
         }
 
         return responseHandler(res, result);
 
     } catch (error) {
-        console.log('authController login error = ', error)
+        console.log('authController_login error = ', error)
         return responseHandler(res,
             responseFuncs.internalServerError({ message: error.message })
         )
